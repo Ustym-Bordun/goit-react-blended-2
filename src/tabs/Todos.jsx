@@ -81,7 +81,7 @@ const Todos = () => {
 
   const [editText, setEditText] = useState('');
   useEffect(() => {
-    console.log('useEffect - currentTodo.text:', currentTodo.text);
+    // console.log('useEffect - currentTodo.text:', currentTodo.text);
 
     setEditText(currentTodo.text || '');
     // setEditText(currentTodo.text ? currentTodo.text : '');
