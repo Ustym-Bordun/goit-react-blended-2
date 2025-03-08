@@ -3,15 +3,15 @@ import { MdOutlineCancel } from 'react-icons/md';
 
 import style from './EditForm.module.css';
 
-const EditForm = ({ updateTodo, cancelUpdate, defaultValue }) => {
+const EditForm = ({ updateTodo, cancelUpdate, editText, onEditText }) => {
   return (
     <form
       className={style.form}
-      onSubmit={e => {
-        e.preventDefault();
+      onSubmit={evt => {
+        evt.preventDefault();
 
-        // console.log(e.target.elements.text.value);
-        updateTodo(e.target.elements.text.value);
+        // console.log(evt.target.elements.text.value);
+        updateTodo(evt.target.elements.text.value);
       }}
     >
       <button className={style.submitButton} type="submit">
@@ -27,10 +27,12 @@ const EditForm = ({ updateTodo, cancelUpdate, defaultValue }) => {
         placeholder="What do you want to write?"
         name="text"
         required
-        defaultValue={defaultValue}
+        value={editText}
+        onChange={evt => onEditText(evt.target.value)}
         autoFocus
       />
     </form>
   );
 };
+
 export default EditForm;

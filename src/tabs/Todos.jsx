@@ -38,7 +38,7 @@ const Todos = () => {
       // console.log('fintTodo not used');
     }
 
-    const newTodo = { id: nanoid(), text: textForNewTodo };
+    const newTodo = { id: nanoid(5), text: textForNewTodo };
     setTodos(prevTodos => [...prevTodos, newTodo]);
   };
 
@@ -49,12 +49,8 @@ const Todos = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [currentTodo, setCurrentTodo] = useState({});
 
-  const handleEditTodo = editTodoId => {
-    setCurrentTodo(
-      todos.find(todo => {
-        return todo.id === editTodoId;
-      })
-    );
+  const handleEditTodo = todo => {
+    setCurrentTodo(todo);
     setIsEditing(true);
   };
 
@@ -83,10 +79,13 @@ const Todos = () => {
     setIsEditing(false);
   };
 
-  const [currentTodoText, setCurrentTodoText] = useState('');
+  const [editText, setEditText] = useState('');
   useEffect(() => {
-    setCurrentTodoText(currentTodo.text);
-  }, [currentTodo.text]);
+    console.log('useEffect - currentTodo.text:', currentTodo.text);
+
+    setEditText(currentTodo.text || '');
+    // setEditText(currentTodo.text ? currentTodo.text : '');
+  }, [currentTodo]);
 
   const fintTodo = newText => todos.some(todo => todo.text === newText);
 
@@ -96,7 +95,8 @@ const Todos = () => {
         <EditForm
           updateTodo={handleUpdateTodo}
           cancelUpdate={handleCancelUpdate}
-          defaultValue={currentTodoText}
+          editText={editText}
+          onEditText={setEditText}
         />
       ) : (
         <Form

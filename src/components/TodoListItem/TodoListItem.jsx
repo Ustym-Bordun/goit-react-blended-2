@@ -26,7 +26,7 @@ const TodoListItem = ({ todo: { text, id }, idx, onDelite, onEditTodo }) => {
         className={style.editButton}
         type="button"
         onClick={() => {
-          onEditTodo(id);
+          onEditTodo({ text, id });
         }}
       >
         <RiEdit2Line size={24} />
