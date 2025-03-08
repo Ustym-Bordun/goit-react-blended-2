@@ -112,7 +112,7 @@ const Todos = () => {
         onEditTodo={handleEditTodo}
       />
 
-      {todos.length === 0 && (
+      {!todos.length && (
         <Text textAlign="center">There are no any todos ...</Text>
       )}
     </>
